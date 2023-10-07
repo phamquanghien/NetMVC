@@ -12,14 +12,16 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-
     public IActionResult Index()
     {
+        ViewBag.thongBao = "Du lieu HttpGet";
         return View();
     }
-
-    public IActionResult Privacy()
+    [HttpPost]
+    public IActionResult Index(string FullName, string Email)
     {
+        string strOutput = "Hello " + FullName.ToUpper() + "-" + Email;
+        ViewBag.thongBao = strOutput;
         return View();
     }
 

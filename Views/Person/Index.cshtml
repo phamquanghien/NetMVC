@@ -1,0 +1,20 @@
+@model IEnumerable<NetMVC.Models.Person>
+<table class="w3-table w3-table-all">
+    <thead>
+        <tr class="w3-blue">
+            <th>PersonID</th>
+            <th>FullName</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.PersonID</td>
+                <td>@item.FullName</td>
+                <td>@item.Address</td>
+            </tr>
+        }
+    </tbody>
+</table>
