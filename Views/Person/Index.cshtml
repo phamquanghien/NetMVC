@@ -1,20 +1,16 @@
-@model IEnumerable<NetMVC.Models.Person>
-<table class="w3-table w3-table-all">
-    <thead>
-        <tr class="w3-blue">
-            <th>PersonID</th>
-            <th>FullName</th>
-            <th>Address</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var item in Model)
-        {
-            <tr>
-                <td>@item.PersonID</td>
-                <td>@item.FullName</td>
-                <td>@item.Address</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="w3-container w3-card w3-round w3-padding"> 
+<form asp-action="Index" class="w3-container">
+  <p>
+  <label>PersonID:</label>
+  <input name="PersonID" class="w3-input w3-round w3-border w3-border-blue" type="text"></p>
+  <p>
+  <label>FullName:</label>
+  <input name="FullName" class="w3-input w3-round w3-border w3-border-blue" type="text"></p>
+  <p>
+    <input type="submit" class="w3-btn w3-round w3-border w3-border-blue w3-blue w3-right" value="Send Data"/>
+</form>
+</div>
+<h2>@ViewBag.thongBao</h2>
+<form asp-action="Index" class="">
+
+</form>
