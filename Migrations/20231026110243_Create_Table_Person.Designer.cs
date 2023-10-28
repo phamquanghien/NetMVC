@@ -10,14 +10,14 @@ using NetMVC.Data;
 namespace NetMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230919041818_Add_Column_Age_Person")]
-    partial class Add_Column_Age_Person
+    [Migration("20231026110243_Create_Table_Person")]
+    partial class Create_Table_Person
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
 
             modelBuilder.Entity("NetMVC.Models.Person", b =>
                 {
@@ -33,7 +33,7 @@ namespace NetMVC.Migrations
 
                     b.HasKey("PersonID");
 
-                    b.ToTable("Person");
+                    b.ToTable("Persons");
                 });
 #pragma warning restore 612, 618
         }

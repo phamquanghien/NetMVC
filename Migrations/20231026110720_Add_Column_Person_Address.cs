@@ -5,25 +5,25 @@
 namespace NetMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Column_Age_Person : Migration
+    public partial class Add_Column_Person_Address : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Age",
-                table: "Person",
-                type: "INTEGER",
+            migrationBuilder.AddColumn<string>(
+                name: "Address",
+                table: "Persons",
+                type: "TEXT",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Age",
-                table: "Person");
+                name: "Address",
+                table: "Persons");
         }
     }
 }

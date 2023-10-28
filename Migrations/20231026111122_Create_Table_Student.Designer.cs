@@ -10,19 +10,26 @@ using NetMVC.Data;
 namespace NetMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230919041529_Create_Table_Person")]
-    partial class Create_Table_Person
+    [Migration("20231026111122_Create_Table_Student")]
+    partial class Create_Table_Student
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
 
             modelBuilder.Entity("NetMVC.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -30,7 +37,21 @@ namespace NetMVC.Migrations
 
                     b.HasKey("PersonID");
 
-                    b.ToTable("Person");
+                    b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("NetMVC.Models.Student", b =>
+                {
+                    b.Property<string>("StudentID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StudentID");
+
+                    b.ToTable("Student");
                 });
 #pragma warning restore 612, 618
         }

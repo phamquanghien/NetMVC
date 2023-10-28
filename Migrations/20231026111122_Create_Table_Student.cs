@@ -5,21 +5,21 @@
 namespace NetMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_Table_Person : Migration
+    public partial class Create_Table_Student : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "Student",
                 columns: table => new
                 {
-                    PersonID = table.Column<string>(type: "TEXT", nullable: false),
+                    StudentID = table.Column<string>(type: "TEXT", nullable: false),
                     FullName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.PersonID);
+                    table.PrimaryKey("PK_Student", x => x.StudentID);
                 });
         }
 
@@ -27,7 +27,7 @@ namespace NetMVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Student");
         }
     }
 }
