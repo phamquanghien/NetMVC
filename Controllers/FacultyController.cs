@@ -10,90 +10,87 @@ using NetMVC.Models;
 
 namespace NetMVC.Controllers
 {
-    public class StudentController : Controller
+    public class FacultyController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentController(ApplicationDbContext context)
+        public FacultyController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Student
+        // GET: Faculty
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Student.Include(s => s.Faculty);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.Faculty != null ? 
+                          View(await _context.Faculty.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Faculty'  is null.");
         }
 
-        // GET: Student/Details/5
+        // GET: Faculty/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.Student == null)
+            if (id == null || _context.Faculty == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .Include(s => s.Faculty)
-                .FirstOrDefaultAsync(m => m.PersonID == id);
-            if (student == null)
+            var faculty = await _context.Faculty
+                .FirstOrDefaultAsync(m => m.FacultyID == id);
+            if (faculty == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(faculty);
         }
 
-        // GET: Student/Create
+        // GET: Faculty/Create
         public IActionResult Create()
         {
-            ViewData["FacultyID"] = new SelectList(_context.Set<Faculty>(), "FacultyID", "FacultyName");
             return View();
         }
 
-        // POST: Student/Create
+        // POST: Faculty/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentID,FacultyID,PersonID,FullName,Age,Address")] Student student)
+        public async Task<IActionResult> Create([Bind("FacultyID,FacultyName")] Faculty faculty)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
+                _context.Add(faculty);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FacultyID"] = new SelectList(_context.Set<Faculty>(), "FacultyID", "FacultyName", student.FacultyID);
-            return View(student);
+            return View(faculty);
         }
 
-        // GET: Student/Edit/5
+        // GET: Faculty/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.Student == null)
+            if (id == null || _context.Faculty == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
-            if (student == null)
+            var faculty = await _context.Faculty.FindAsync(id);
+            if (faculty == null)
             {
                 return NotFound();
             }
-            ViewData["FacultyID"] = new SelectList(_context.Set<Faculty>(), "FacultyID", "FacultyID", student.FacultyID);
-            return View(student);
+            return View(faculty);
         }
 
-        // POST: Student/Edit/5
+        // POST: Faculty/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("StudentID,FacultyID,PersonID,FullName,Age,Address")] Student student)
+        public async Task<IActionResult> Edit(string id, [Bind("FacultyID,FacultyName")] Faculty faculty)
         {
-            if (id != student.PersonID)
+            if (id != faculty.FacultyID)
             {
                 return NotFound();
             }
@@ -102,12 +99,12 @@ namespace NetMVC.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(faculty);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.PersonID))
+                    if (!FacultyExists(faculty.FacultyID))
                     {
                         return NotFound();
                     }
@@ -118,51 +115,49 @@ namespace NetMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FacultyID"] = new SelectList(_context.Set<Faculty>(), "FacultyID", "FacultyID", student.FacultyID);
-            return View(student);
+            return View(faculty);
         }
 
-        // GET: Student/Delete/5
+        // GET: Faculty/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.Student == null)
+            if (id == null || _context.Faculty == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .Include(s => s.Faculty)
-                .FirstOrDefaultAsync(m => m.PersonID == id);
-            if (student == null)
+            var faculty = await _context.Faculty
+                .FirstOrDefaultAsync(m => m.FacultyID == id);
+            if (faculty == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(faculty);
         }
 
-        // POST: Student/Delete/5
+        // POST: Faculty/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.Student == null)
+            if (_context.Faculty == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Student'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Faculty'  is null.");
             }
-            var student = await _context.Student.FindAsync(id);
-            if (student != null)
+            var faculty = await _context.Faculty.FindAsync(id);
+            if (faculty != null)
             {
-                _context.Student.Remove(student);
+                _context.Faculty.Remove(faculty);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(string id)
+        private bool FacultyExists(string id)
         {
-          return (_context.Student?.Any(e => e.PersonID == id)).GetValueOrDefault();
+          return (_context.Faculty?.Any(e => e.FacultyID == id)).GetValueOrDefault();
         }
     }
 }
