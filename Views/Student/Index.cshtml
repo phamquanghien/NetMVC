@@ -4,17 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="w3-row">
-    <b>Student/Index</b>
-    <a class="w3-right w3-btn w3-round w3-border w3-border-blue w3-small w3-hover-aqua" asp-action="Create">Create New</a>
-    <hr>
-</div>
-<table class="w3-table-all w3-bordered w3-striped w3-border test w3-hoverable w3-card-4">
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
     <thead>
-        <tr class="w3-green">
-            <th>
-                @Html.DisplayNameFor(model => model.StudentID)
-            </th>
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Fullname)
             </th>
@@ -33,15 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
-            <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fullname)
             </td>
@@ -62,6 +56,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StudentID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
             </td>
         </tr>

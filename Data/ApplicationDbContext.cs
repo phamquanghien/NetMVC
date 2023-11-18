@@ -12,5 +12,6 @@ namespace NetMVC.Data
         //khai bao anh xa vao database
         public DbSet<Person> Person { get; set; }
         public DbSet<Student> Student { get; set; }
+        public DbSet<Employee> Employee { get; set; }
     }
 }
