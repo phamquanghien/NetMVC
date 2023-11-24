@@ -6,6 +6,6 @@ namespace NetMVC.Models
     {
         [Key]
         public int EmpID { get; set; }
-        public string EmpName { get; set; }
+        public string? EmpName { get; set; }
     }
 }

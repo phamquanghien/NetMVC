@@ -8,12 +8,12 @@ namespace NetMVC.Models
     {
         [Key]
         [Required(ErrorMessage = "PersonId khong duoc de trong")]
-        public string PersonID { get; set; }
+        public required string PersonID { get; set; }
         [Required(ErrorMessage ="Full name is required")]
         [MaxLength(150)]
         [MinLength(3)]
-        public string FullName { get; set; }
+        public required string FullName { get; set; }
         [DataType(DataType.EmailAddress)]
-        public string Address { get; set; }
+        public required string Address { get; set; }
     }
 }
