@@ -1,23 +1,29 @@
-@model List<UserViewModel>
+<!-- File: Views/Account/Index.cshtml -->
+@model IEnumerable<ApplicationUser>
 
-<h2>User List</h2>
-
+<div class="w3-row">
+    <p class="w3-col l2">Account list</p>
+    <a asp-action="create" class="w3-btn w3-border w3-border-blue w3-right w3-card-4 w3-round w3-hover-blue">+ Create</a>
+</div>
+<hr>
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Email</th>
-            <th>UserName</th>
-            <th>Action</th>
-            <th>FullName</th>
+            <th>Full Name</th>
+            <th>Password</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var user in Model)
         {
             <tr>
+                <td>@user.Id</td>
                 <td>@user.Email</td>
-                <td>@user.UserName</td>
                 <td>@user.FullName</td>
+                <td>@user.PasswordHash</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |

@@ -5,11 +5,11 @@ namespace NetMVC.Models
     // UserViewModel.cs
     public class UserViewModel
     {
-        public required string Id { get; set; }
         [Required]
         [EmailAddress]
         public required string Email { get; set; }
-        public string? UserName { get; set; }
+        [Required]
+        public required string? UserName { get; set; }
         public string? FullName { get; set; }
         [Required]
         [DataType(DataType.Password)]
