@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NetMVC.Data;
 using NetMVC.Models;
 using NetMVC.Models.Process;
+using OfficeOpenXml;
 
 namespace NetMVC.Controllers
 {
@@ -199,6 +200,20 @@ namespace NetMVC.Controllers
             return View();
         }
 
+        public IActionResult Download()
+        {
+            var fileName = "EmployeeList.xlsx";
+            using(ExcelPackage excelPackage = new ExcelPackage())
+            {
+                ExcelWorksheet excelWorksheet = excelPackage.Workbook.Worksheets.Add("Sheet 1");
+                excelWorksheet.Cells["A1"].Value = "EmpID";
+                excelWorksheet.Cells["B1"].Value = "EmpName";
+                var empList = _context.Employee.ToList();
+                excelWorksheet.Cells["A2"].LoadFromCollection(empList);
+                var stream = new MemoryStream(excelPackage.GetAsByteArray());
+                return File(stream,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
+            }
+        }
         private bool EmployeeExists(int id)
         {
           return (_context.Employee?.Any(e => e.EmpID == id)).GetValueOrDefault();
